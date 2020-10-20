@@ -94,7 +94,7 @@ class Adafruit_EPD:  # pylint: disable=too-many-instance-attributes, too-many-pu
         self._black_inverted = self._color_inverted = True
         self.hardware_reset()
 
-    def display(self):  # pylint: disable=too-many-branches
+    def display(self, block=True):  # pylint: disable=too-many-branches
         """show the contents of the display buffer"""
         self.power_up()
 
@@ -167,7 +167,7 @@ class Adafruit_EPD:  # pylint: disable=too-many-instance-attributes, too-many-pu
             if self.sram:
                 self.sram.cs_pin.value = True
 
-        self.update()
+        self.update(block)
 
     def hardware_reset(self):
         """If we have a reset pin, do a hardware reset by toggling it"""

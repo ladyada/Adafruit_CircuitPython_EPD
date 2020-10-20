@@ -135,9 +135,11 @@ class Adafruit_IL0373(Adafruit_EPD):
         self.command(_IL0373_VCM_DC_SETTING, bytearray([0x00]))
         self.command(_IL0373_POWER_OFF)
 
-    def update(self):
+    def update(self, block=True):
         """Update the display from internal memory"""
         self.command(_IL0373_DISPLAY_REFRESH)
+        if not block:
+            return
         time.sleep(0.1)
         self.busy_wait()
         if not self._busy:
